@@ -1,5 +1,7 @@
 ﻿
 using Microsoft.Extensions.DependencyInjection;
+using UserManagementService.Domain.Services;
+using UserManagementService.Domain.Services.Interfaces;
 
 namespace UserManagementService.Domain.Extensions
 {
@@ -7,8 +9,9 @@ namespace UserManagementService.Domain.Extensions
     {
         public static IServiceCollection AddDomain(this IServiceCollection services)
         {
+            services.AddTransient<IAuthorizationService, AuthorizationService>();
 
             return services;
-        }   
+        }
     }
 }

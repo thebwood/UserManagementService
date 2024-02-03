@@ -1,13 +1,14 @@
 using UserManagementService.Api.Extensions;
 using UserManagementService.Domain.Extensions;
 using UserManagementService.Infrastructure.Extensions;
+using UserManagementService.Library.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddPresentation()
     .AddDomain()
-    .AddInfrastructure();
+    .AddInfrastructure(builder.Configuration.GetConnectionString("Database"));
 
 // Add services to the container.
 
@@ -17,6 +18,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.MapIdentityApi<ApplicationUser>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
